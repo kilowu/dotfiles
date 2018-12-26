@@ -1,9 +1,15 @@
-;; Emacs configuration file
+;;; init.el -- my .emacs file
+
 ;; Wu Wei <weiwu@cacheme.net>
 ;; Copyright (c) 2018
 
+;;; Commentary:
 
-;; This is only needed once, near the top of the file
+;; The init.el/Commentary/Code lines only exist for making flycheck happy
+;; TODO: find a way to prevent flycheck from checking these crazily
+
+;;; Code:
+
 (eval-when-compile
   ;; MELPA setup
   (require 'package)
@@ -72,7 +78,7 @@
                      (innamespace . [0])
                      )
     )
-  "Apsara C/C++ Programming Style\nThis style is a modification of stroustrup style. ")
+  "Apsara C/C++ Programming Style\nThis style is a modification of stroustrup style.")
 (c-add-style "apsara" apsara-c-style)
 (setq c-default-style '((c++-mode . "apsara") (c-mode . "apsara") (awk-mode . "awk") (other . "gnu")))
 
@@ -82,27 +88,25 @@
 
 
 ;; Helm/Projectile
-(unless (package-installed-p 'helm)
-  (package-install 'helm))
-(require 'helm-config)
-(helm-mode 1)
+(use-package helm
+  :ensure t)
 
-(unless (package-installed-p 'projectile)
-  (package-install 'projectile))
-(require 'projectile)
-(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(projectile-global-mode)
-;; indexing big projects at every time is just slow
-(setq projectile-enable-caching t)
-
-(setq projectile-completion-system 'helm)
+(use-package projectile
+  :ensure t
+  :after (helm)
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  ("s-p" . projectile-command-map)
+  :config
+  (projectile-mode)
+  (setq projectile-completion-system 'helm)
+  (setq projectile-enable-caching t)) ; indexing big projects at every time is just slow
 
 
 ;; Flycheck
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :hook (after-init . global-flycheck-mode))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
