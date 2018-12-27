@@ -49,6 +49,8 @@
 (when window-system
   ;; remove toolbar
   (tool-bar-mode -1)
+  ;; set font and size
+  (set-face-attribute 'default nil :font "-outline-Monaco-normal-normal-normal-mono-14-*-*-*-c-*-iso8859-1" )
   ;; set default frame size
   (set-frame-size (selected-frame) 130 50)
   ;; set a dark color theme
@@ -112,17 +114,3 @@
 ;; Magit
 (use-package magit
   :ensure t)
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (magit flycheck use-package projectile helm))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
