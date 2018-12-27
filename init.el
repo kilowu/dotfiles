@@ -37,7 +37,7 @@
 ;; scroll down with the cursor, move down the buffer one line at a time
 (setq scroll-step 1)
 ;; represent the buffer name as title
-(setq frame-title-format "Kilo@%f")
+(setq frame-title-format "%f")
 (setq column-number-mode t)
 (setq line-number-mode t)
 
