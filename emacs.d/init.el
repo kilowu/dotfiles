@@ -125,3 +125,29 @@
 ;; Magit
 (use-package magit
   :ensure t)
+
+
+;; Irony
+(use-package irony
+  :ensure t
+  :hook
+  (c++-mode . irony-mode)
+  (c-mode . irony-mode)
+  (irony-mode . irony-cdb-autosetup-compile-options))
+
+
+;; company: a completion (complete anything) front-end
+;; company-irony: the irony back-end of company
+(use-package company
+  :ensure
+  :hook (after-init . global-company-mode))
+
+(use-package company-irony
+  :ensure t
+  :after (irony company)
+  :config (add-to-list 'company-backends 'company-irony))
+
+
+;; To make flycheck happy
+(provide 'init)
+;;; init.el ends here

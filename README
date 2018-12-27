@@ -1,1 +1,23 @@
-Emacs startup files, etc.
+Emacs init.el
+-------------
+
+- Requires
+
+  Emacs version >= 25.1
+
+
+- Installation
+
+  1. git clone this repo
+  2. (M-X package-refresh-contents RET)
+  3. Add the following one-liner in .emacs or .emacs.d/init.el
+
+      (load "~/path/to/your/git-repo/.emacs.d/init.el")
+
+- Other Notes
+
+  The irony mode (brings C/C++ IDE to emacs) requires a C++ server program
+  "irony-server" running under the background, which in turn requires CMake
+  and libclang to build.
+
+  Please refer https://github.com/Sarcasm/irony-mode for more details
