@@ -91,7 +91,9 @@
 
 ;; Helm/Projectile
 (use-package helm
-  :ensure t)
+  :ensure t
+  :init (helm-mode 1))
+
 
 (use-package projectile
   :ensure t
