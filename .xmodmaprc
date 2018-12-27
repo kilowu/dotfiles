@@ -1,0 +1,16 @@
+! Change modifier key under X window system
+!
+!  * xmodmap should be installed at first
+!  * Read this file and the result of "xmodmap -pm" to see if there is anything
+!    could possibly go wrong
+!  * Then run "xmodmap .xmodmaprc"
+
+
+! *** Turn CapsLock into Control ***
+! Firstly clear these two modifier keys
+clear Lock
+clear control
+! 0x42, which is keynum of original CapsLock, now is set to be left Control
+keycode 0x42 = Control_L
+! Add Control back
+add control = Control_L Control_R
