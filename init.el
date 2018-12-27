@@ -46,15 +46,24 @@
 ;; disable blinking
 (blink-cursor-mode 0)
 
+
+;; GUI mode settings
 (when window-system
   ;; remove toolbar
   (tool-bar-mode -1)
-  ;; set font and size
-  (set-face-attribute 'default nil :font "-outline-Monaco-normal-normal-normal-mono-14-*-*-*-c-*-iso8859-1" )
   ;; set default frame size
   (set-frame-size (selected-frame) 130 50)
   ;; set a dark color theme
-  (load-theme 'tsdh-dark))
+  (load-theme 'tsdh-dark)
+
+  ;; macOS things
+  (if (eq system-type 'darwin)
+      ;; Set font (especially for size), because the default font size is too
+      ;; small on macOS.
+      (set-face-attribute 'default nil :font
+                          "-outline-Monaco-normal-normal-normal-mono-14-*-*-*-c-*-iso8859-1" ))
+  ) ;; End of GUI settings
+
 
 
 ;; Backup files can be really anoying, so redirect them to /tmp
