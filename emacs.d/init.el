@@ -124,7 +124,8 @@
 
 ;; Magit
 (use-package magit
-  :ensure t)
+  :ensure t
+  :bind ("C-x g" . magit-status))
 
 
 ;; Irony
