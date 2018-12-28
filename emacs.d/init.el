@@ -143,7 +143,10 @@
 ;; Magit
 (use-package magit
   :ensure t
-  :bind ("C-x g" . magit-status))
+  :bind ("C-x g" . magit-status)
+  :init
+  ;; "C-c M-g" to magit-file-popup when in normal file buffer
+  (global-magit-file-mode))
 
 
 ;; Irony
