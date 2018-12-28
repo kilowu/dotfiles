@@ -31,7 +31,6 @@
 ; remove startup message
 (setq inhibit-startup-message t)
 (show-paren-mode t)
-(setq show-paren-style 'parentheses)
 ;; use 4 spaces to as tab
 (setq-default indent-tabs-mode nil)
 ;; scroll down with the cursor, move down the buffer one line at a time
