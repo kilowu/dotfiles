@@ -53,8 +53,11 @@
   (tool-bar-mode -1)
   ;; set default frame size
   (set-frame-size (selected-frame) 130 50)
-  ;; set a dark color theme
-  (load-theme 'tsdh-dark)
+
+  ;; theme
+  (use-package solarized-theme
+    :ensure
+    :init (load-theme 'solarized-dark))
 
   ;; macOS things
   (if (eq system-type 'darwin)
@@ -63,7 +66,6 @@
       (set-face-attribute 'default nil :font
                           "-outline-Monaco-normal-normal-normal-mono-14-*-*-*-c-*-iso8859-1" ))
   ) ;; End of GUI settings
-
 
 
 ;; Backup files can be really anoying, so redirect them to /tmp
@@ -136,13 +138,12 @@
   (c-mode . irony-mode)
   (irony-mode . irony-cdb-autosetup-compile-options))
 
-
 ;; company: a completion (complete anything) front-end
-;; company-irony: the irony back-end of company
 (use-package company
   :ensure
   :hook (after-init . global-company-mode))
 
+;; company-irony: the irony back-end of company
 (use-package company-irony
   :ensure t
   :after (irony company)
