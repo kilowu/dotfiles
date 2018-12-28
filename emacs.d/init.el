@@ -128,6 +128,12 @@
   (setq projectile-enable-caching t)) ; indexing big projects at every time is just slow
 
 
+;; company: a completion (complete anything) front-end
+(use-package company
+  :ensure
+  :hook (after-init . global-company-mode))
+
+
 ;; Flycheck
 (use-package flycheck
   :ensure t
@@ -148,16 +154,23 @@
   (c-mode . irony-mode)
   (irony-mode . irony-cdb-autosetup-compile-options))
 
-;; company: a completion (complete anything) front-end
-(use-package company
-  :ensure
-  :hook (after-init . global-company-mode))
-
 ;; company-irony: the irony back-end of company
 (use-package company-irony
   :ensure t
   :after (irony company)
   :config (add-to-list 'company-backends 'company-irony))
+
+
+;; Brute-forced jump-to-definition tool. Just ag/git-grep/grep the code by pattern.
+(use-package dumb-jump
+  :ensure t
+  :bind (("M-g o" . dumb-jump-go-other-window)
+         ("M-g j" . dumb-jump-go)
+         ("M-g i" . dumb-jump-go-prompt)
+         ("M-g x" . dumb-jump-go-prefer-external)
+         ("M-g z" . dumb-jump-go-prefer-external-other-window))
+  :config
+  (setq dumb-jump-selector 'helm))
 
 
 ;; To make flycheck happy
