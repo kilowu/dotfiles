@@ -117,12 +117,23 @@
       (append '(("\\.h$" . c++-mode)) auto-mode-alist))
 
 
-;; Helm/Projectile
+;; Helm
+;;  see http://tuhdo.github.io/helm-intro.html
 (use-package helm
   :ensure t
-  :init (helm-mode 1))
+  :bind (("M-x" . 'helm-M-x) ; A great M-x replacement, which can fully leverage the helm discovery engine.
+         ("C-x b" . 'helm-mini) ; besides buffers, this mode also offers recentf
+         ("C-x C-f" . 'helm-find-files)
+         ("M-y". 'helm-show-kill-ring))
+  :init (helm-mode 1)
+  :config
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
+  ;; (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+  )
 
 
+;; Projectile
 (use-package projectile
   :ensure t
   :after (helm)
