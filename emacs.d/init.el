@@ -50,8 +50,8 @@
 (when window-system
   ;; remove toolbar
   (tool-bar-mode -1)
-  ;; set default frame size
-  (set-frame-size (selected-frame) 130 50)
+  ;; remove scroll bar
+  (scroll-bar-mode 0)
 
   ;; theme
   (use-package solarized-theme
