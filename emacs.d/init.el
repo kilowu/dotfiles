@@ -39,22 +39,19 @@
 (setq frame-title-format "%f")
 (setq column-number-mode t)
 (setq line-number-mode t)
-
-;; set cursor to a vertical bar
-(setq-default cursor-type 'bar)
-;; disable blinking
-(blink-cursor-mode 0)
+(blink-cursor-mode 1)
 
 
-;; GUI mode settings
 (if window-system
+     ;;; GUI settings. Window components are kept to be minimal.
     (progn
-      ;; *** Keep UI other than soley text related stuff minimal. ***
       ;; Remove toolbar. Frankly speaking, it's ugly and of little usage.
       (tool-bar-mode -1)
       ;; Remove scroll bar. Seriously, who uses it to scroll around? Since the whole point
       ;; of emacs is to keep your hands on keyboard.
       (scroll-bar-mode 0)
+      ;; A slim vertical bar looks clean and swift. Cursor type can be only changed under GUI.
+      (setq-default cursor-type 'bar)
 
       ;; theme
       (use-package solarized-theme
@@ -129,8 +126,7 @@
   :config
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
   ;; (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
-  )
+  (define-key helm-map (kbd "C-z")  'helm-select-action)) ; list actions using C-z
 
 
 ;; Projectile
