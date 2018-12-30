@@ -114,10 +114,18 @@
       (append '(("\\.h$" . c++-mode)) auto-mode-alist))
 
 
+;; A mode to hide minor mode name from status bar.
+;; We will use it in use-packge. So we must ensure this package is installed
+;; prior to the declarations for other packages.
+(use-package diminish
+  :ensure t)
+
+
 ;; Helm
 ;;  see http://tuhdo.github.io/helm-intro.html
 (use-package helm
   :ensure t
+  :diminish helm-mode
   :bind (("M-x" . 'helm-M-x) ; A great M-x replacement, which can fully leverage the helm discovery engine.
          ("C-x b" . 'helm-mini) ; besides buffers, this mode also offers recentf
          ("C-x C-f" . 'helm-find-files)
@@ -145,12 +153,14 @@
 ;; company: a completion (complete anything) front-end
 (use-package company
   :ensure
+  :diminish company-mode
   :hook (after-init . global-company-mode))
 
 
 ;; Flycheck
 (use-package flycheck
   :ensure t
+  :diminish flycheck-mode
   :hook (after-init . global-flycheck-mode))
 
 
