@@ -167,6 +167,8 @@
 ;; Magit
 (use-package magit
   :ensure t
+  ;; Magit enables auto-revert-mode for git tracked files
+  :diminish auto-revert-mode
   :bind ("C-x g" . magit-status)
   :init
   ;; "C-c M-g" to magit-file-popup when in normal file buffer
