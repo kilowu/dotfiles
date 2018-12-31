@@ -206,6 +206,17 @@
       (append '(("\\.h$" . c++-mode)) auto-mode-alist))
 
 
+;; Set elpa directory as read-only. I often study (read) code in local elpa repo, and
+;; I don't want to modify them by accident. The file system permission is useless here,
+;; because this local repo is run by non-root user.
+;; TODO: Maybe a generalized feature. We could add a custom variable, which is a list of
+;; read-only directories.
+(dir-locals-set-class-variables 'read-only
+                                '((nil . ((buffer-read-only . t)))))
+(dolist (dir (list "~/.emacs.d/elpa"))
+  (dir-locals-set-directory-class (file-truename dir) 'read-only))
+
+
 ;; To make flycheck happy
 (provide 'init)
 ;;; init.el ends here
