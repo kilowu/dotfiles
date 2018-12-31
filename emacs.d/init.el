@@ -114,6 +114,12 @@
       (append '(("\\.h$" . c++-mode)) auto-mode-alist))
 
 
+(use-package smart-mode-line
+  :ensure t
+  ;; Prevent theme from being loaded before custom generated code. Also see above code of load-theme.
+  :hook (after-init . (lambda () (sml/setup))))
+
+
 ;; A mode to hide minor mode name from status bar.
 ;; We will use it in use-packge. So we must ensure this package is installed
 ;; prior to the declarations for other packages.
