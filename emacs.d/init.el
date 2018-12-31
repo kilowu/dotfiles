@@ -10,20 +10,28 @@
 
 ;;; Code:
 
+;; use-package settings
 (eval-when-compile
   ;; MELPA setup
   (require 'package)
   (let* ((no-ssl (or (memq system-type '(windows-nt ms-dos))
                      (not (gnutls-available-p))))
          (proto (if no-ssl "http" "https")))
+    (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
     (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
     (when (< emacs-major-version 24)
       ;; For important compatibility libraries like cl-lib
       (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
   (package-initialize)
   (unless (package-installed-p 'use-package)
-  (package-install 'use-package))
+    (package-install 'use-package))
   (require 'use-package))
+
+;; Use use-package to automate package downloading.
+(setq use-package-always-ensure t)
+;; Prefer stable version by default. You can always specifically pin another repo
+;; in indivisual use-package statement.
+(setq use-package-always-pin "melpa-stable")
 
 
 (set-language-environment 'UTF-8)
@@ -115,7 +123,6 @@
 
 
 (use-package smart-mode-line
-  :ensure t
   ;; Prevent theme from being loaded before custom generated code. Also see above code of load-theme.
   :hook (after-init . (lambda () (sml/setup))))
 
@@ -123,14 +130,12 @@
 ;; A mode to hide minor mode name from status bar.
 ;; We will use it in use-packge. So we must ensure this package is installed
 ;; prior to the declarations for other packages.
-(use-package diminish
-  :ensure t)
+(use-package diminish)
 
 
 ;; Helm
 ;;  see http://tuhdo.github.io/helm-intro.html
 (use-package helm
-  :ensure t
   :diminish helm-mode
   :bind (("M-x" . 'helm-M-x) ; A great M-x replacement, which can fully leverage the helm discovery engine.
          ("C-x b" . 'helm-mini) ; besides buffers, this mode also offers recentf
@@ -145,7 +150,6 @@
 
 ;; Projectile
 (use-package projectile
-  :ensure t
   :after (helm)
   :bind-keymap
   ("C-c p" . projectile-command-map)
@@ -158,21 +162,18 @@
 
 ;; company: a completion (complete anything) front-end
 (use-package company
-  :ensure
   :diminish company-mode
   :hook (after-init . global-company-mode))
 
 
 ;; Flycheck
 (use-package flycheck
-  :ensure t
   :diminish flycheck-mode
   :hook (after-init . global-flycheck-mode))
 
 
 ;; Magit
 (use-package magit
-  :ensure t
   ;; Magit enables auto-revert-mode for git tracked files
   :diminish auto-revert-mode
   :bind ("C-x g" . magit-status)
@@ -183,7 +184,6 @@
 
 ;; Irony
 (use-package irony
-  :ensure t
   :hook
   (c++-mode . irony-mode)
   (c-mode . irony-mode)
@@ -191,14 +191,12 @@
 
 ;; company-irony: the irony back-end of company
 (use-package company-irony
-  :ensure t
   :after (irony company)
   :config (add-to-list 'company-backends 'company-irony))
 
 
 ;; Brute-forced jump-to-definition tool. Just ag/git-grep/grep the code by pattern.
 (use-package dumb-jump
-  :ensure t
   :bind (("M-g o" . dumb-jump-go-other-window)
          ("M-g j" . dumb-jump-go)
          ("M-g i" . dumb-jump-go-prompt)
