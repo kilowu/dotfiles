@@ -209,12 +209,54 @@
 ;; Set elpa directory as read-only. I often study (read) code in local elpa repo, and
 ;; I don't want to modify them by accident. The file system permission is useless here,
 ;; because this local repo is run by non-root user.
-;; TODO: Maybe a generalized feature. We could add a custom variable, which is a list of
+;; Note that setting directory local variable does not work. We need some advanced
+;; technique to do this.  See comments of `my-emacs-read-only-protection-hook'.
+
+;; TODO: This may be a generalized feature. We could add a custom variable, which is a list of
 ;; read-only directories.
-(dir-locals-set-class-variables 'read-only
-                                '((nil . ((buffer-read-only . t)))))
-(dolist (dir (list "~/.emacs.d/elpa"))
-  (dir-locals-set-directory-class (file-truename dir) 'read-only))
+
+;; The following code is ugly.  Please remind that the code is written by a
+;; novice lisp programmer.
+;; REVIEW: Refine this code after I learned how to do this elegently in lisp.
+(defun my-emacs-backtrace-frame-contains-package-install ()
+  "Determine if `package-install' is in call stack.
+Return non-nil if the call stack contains `package-install' call.  Otherwise nil."
+  (let ((frame-num 0)
+        (frame-ret t)
+        (ret nil))
+    (while frame-ret
+      (setq frame-ret (backtrace-frame frame-num))
+      (let ((func (if (listp frame-ret)
+                      (let ((remain (cdr frame-ret)))
+                        (if (listp remain)
+                            (car remain)
+                          nil))
+                    nil)))
+        (if (eq func 'package-install)
+            ;; REVIEW: Since we found the package-intall frame, it'd be unnecessary
+            ;; to search the rest of the backtrace. But I don't know how to break a while
+            ;; loop in elisp now.
+            (setq ret t)
+          nil))
+      (setq frame-num (1+ frame-num)))
+    ret))
+
+;; Note that setting all files under elpa directory as read-only is very tricky,
+;; since `package-install' needs to generate auto-load files under this
+;; directory, which will be blocked by this hook.  We bypass this problem by a
+;; very dirty hack.  The hack merely checks the backtrace when the hook is
+;; being called.  And if it finds the backtrace contains `package-install' call,
+;; which means the call is propably initiated by package command, it will not
+;; set the buffer as read-only.  Now I don't know if this hack is reliable.
+(defun my-emacs-read-only-protection-hook ()
+  "A `find-file-hook' which protects some file as read-only buffer.
+Currently only elpa local repo directory is protected."
+  (when (string-prefix-p (expand-file-name "~/.emacs.d/elpa")
+                         (buffer-file-name))
+    (unless (my-emacs-backtrace-frame-contains-package-install)
+      (setq buffer-read-only t))))
+
+(add-hook 'find-file-hook 'my-emacs-read-only-protection-hook)
 
 
 ;; To make flycheck happy
