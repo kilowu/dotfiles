@@ -102,9 +102,11 @@
                              (load-theme 'solarized t)))
 
 
-(use-package smart-mode-line
-  ;; Prevent theme from being loaded before custom generated code. Also see above code of load-theme.
-  :hook (after-init . (lambda () (sml/setup))))
+(use-package spaceline
+  :init
+  (require 'spaceline-config)
+  (spaceline-emacs-theme)
+  (spaceline-helm-mode))
 
 
 ;; A mode to hide minor mode name from status bar.
