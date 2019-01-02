@@ -166,6 +166,7 @@
 
 ;; Irony
 (use-package irony
+  :diminish irony-mode
   :hook
   (c++-mode . irony-mode)
   (c-mode . irony-mode)
