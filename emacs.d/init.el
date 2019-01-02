@@ -102,6 +102,7 @@
                              (load-theme 'solarized t)))
 
 
+;; A great replacement of vanilla emacs mode-line
 (use-package spaceline
   :init
   (require 'spaceline-config)
@@ -109,6 +110,12 @@
   (spaceline-helm-mode)
   :custom
   (powerline-height 20 "test"))
+
+
+;; Show window number and easy jump to window by number
+(use-package winum
+  :config
+  (winum-mode))
 
 
 ;; A mode to hide minor mode name from status bar.
