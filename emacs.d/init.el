@@ -85,8 +85,12 @@
 ;;; Solarized theme
 ;; It has a package in elpa, but it's not usable due to broken receipe.  So we
 ;; include it in our source code.
+(message "%s" load-file-name)
 (add-to-list 'custom-theme-load-path
-             (expand-file-name "thirdparty/emacs-color-theme-solarized"))
+             (let ((this-dir (file-name-directory load-file-name)))
+               (expand-file-name "thirdparty/emacs-color-theme-solarized"
+                                 this-dir)))
+
 ;; load-theme will trigger a prompt from emacs saying the theme runs elisp
 ;; code. Then it is your responsibility to ensure it's safe to do so. After
 ;; that, the approved (by you) theme will be registered in custom-set-variables
