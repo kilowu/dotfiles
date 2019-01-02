@@ -106,7 +106,9 @@
   :init
   (require 'spaceline-config)
   (spaceline-emacs-theme)
-  (spaceline-helm-mode))
+  (spaceline-helm-mode)
+  :custom
+  (powerline-height 20 "test"))
 
 
 ;; A mode to hide minor mode name from status bar.
