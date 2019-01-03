@@ -30,7 +30,7 @@
 ;; Use use-package to automate package downloading.
 (setq use-package-always-ensure t)
 ;; Prefer stable version by default. You can always specifically pin another repo
-;; in indivisual use-package statement.
+;; in individual use-package statement.
 (setq use-package-always-pin "melpa-stable")
 
 
