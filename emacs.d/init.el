@@ -106,10 +106,14 @@
 (use-package spaceline
   :init
   (require 'spaceline-config)
+  :config
   (spaceline-emacs-theme)
   (spaceline-helm-mode)
+  (when (and window-system (eq system-type 'darwin))
+    (customize-set-variable 'powerline-image-apple-rgb t
+                            "Otherwise the line looks crippy on macOS"))
   :custom
-  (powerline-height 20 "test"))
+  (powerline-height 20 "Make powerline some space to breathe"))
 
 
 ;; Show window number and easy jump to window by number
