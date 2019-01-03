@@ -85,7 +85,6 @@
 ;;; Solarized theme
 ;; It has a package in elpa, but it's not usable due to broken receipe.  So we
 ;; include it in our source code.
-(message "%s" load-file-name)
 (add-to-list 'custom-theme-load-path
              (let ((this-dir (file-name-directory load-file-name)))
                (expand-file-name "thirdparty/emacs-color-theme-solarized"
@@ -107,11 +106,12 @@
   :init
   (require 'spaceline-config)
   :config
-  (spaceline-emacs-theme)
   (spaceline-helm-mode)
+  (spaceline-emacs-theme)
   (when (and window-system (eq system-type 'darwin))
     (customize-set-variable 'powerline-image-apple-rgb t
                             "Otherwise the line looks crippy on macOS"))
+  (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
   :custom
   (powerline-height 20 "Make powerline some space to breathe"))
 
