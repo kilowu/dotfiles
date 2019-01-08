@@ -135,6 +135,7 @@
   :bind (("M-x" . 'helm-M-x) ; A great M-x replacement, which can fully leverage the helm discovery engine.
          ("C-x b" . 'helm-mini) ; besides buffers, this mode also offers recentf
          ("C-x C-f" . 'helm-find-files)
+         ("M-s o" . 'helm-occur)
          ("M-y". 'helm-show-kill-ring))
   :init (helm-mode 1)
   :config
