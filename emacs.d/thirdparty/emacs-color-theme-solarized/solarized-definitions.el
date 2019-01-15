@@ -473,6 +473,8 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 ;; Flymake
                 (flymake-errline (,@fmt-bold ,@fg-red)) ; Error
                 (flymake-warnline (,@fmt-bold ,@fg-red))
+                ;; flycheck
+                (flycheck-error (,@fg-red (:underline (:color 'foreground-color :style 'wave))))
                 ;; column-marker
                 (column-marker-1 (,@bg-base01))
                 (column-marker-2 (,@bg-cyan))
