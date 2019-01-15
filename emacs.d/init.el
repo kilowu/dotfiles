@@ -101,6 +101,18 @@
                              (customize-set-variable 'solarized-bold nil "no bold")
                              (load-theme 'solarized t)))
 
+(defun my-emacs-switch-theme ()
+  "An convenient command to switch between dark/light solarized theme.
+If the current mode is light then switch to dark.  Do the contrary otherwise."
+  (interactive)
+  (customize-set-variable 'frame-background-mode
+                          (if (eq frame-background-mode 'dark)
+                              'light
+                            'dark))
+  (enable-theme 'solarized)
+  ;; spaceline need to be re-compiled after its face being changed.
+  (spaceline-compile))
+
 
 ;; A great replacement of vanilla emacs mode-line
 (use-package spaceline
