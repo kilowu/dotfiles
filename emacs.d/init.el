@@ -98,6 +98,7 @@
 ;; this init.el is supposed to run before custom scripts.
 ;; Hence load-theme is placed in the hook "after-init-hook".
 (add-hook 'after-init-hook (lambda()
+                             (customize-set-variable 'solarized-bold nil "no bold")
                              (load-theme 'solarized t)))
 
 
