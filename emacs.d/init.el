@@ -216,6 +216,17 @@ If the current mode is light then switch to dark.  Do the contrary otherwise."
   (setq dumb-jump-selector 'helm))
 
 
+;; markdown-mode
+;;  doc: https://jblevins.org/projects/markdown-mode/
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+    :init (setq markdown-command "multimarkdown"))
+
+
 ;;; Other customization stuff not managed by use-package
 
 ;; coding standard of the Apsara project
