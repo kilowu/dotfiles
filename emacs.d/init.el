@@ -116,6 +116,7 @@ If the current mode is light then switch to dark.  Do the contrary otherwise."
 
 ;; A great replacement of vanilla emacs mode-line
 (use-package spaceline
+  :commands (spaceline-helm-mode splace-line-emacs-theme)
   :init
   (require 'spaceline-config)
   :config
@@ -131,6 +132,7 @@ If the current mode is light then switch to dark.  Do the contrary otherwise."
 
 ;; Show window number and easy jump to window by number
 (use-package winum
+  :commands (winum-mode)
   :config
   (winum-mode))
 
@@ -145,6 +147,7 @@ If the current mode is light then switch to dark.  Do the contrary otherwise."
 ;;  see http://tuhdo.github.io/helm-intro.html
 (use-package helm
   :diminish helm-mode
+  :commands (helm-M-x helm-mini helm-find-files helm-occur helm-show-kill-ring helm-mode)
   :bind (("M-x" . 'helm-M-x) ; A great M-x replacement, which can fully leverage the helm discovery engine.
          ("C-x b" . 'helm-mini) ; besides buffers, this mode also offers recentf
          ("C-x C-f" . 'helm-find-files)
@@ -160,6 +163,7 @@ If the current mode is light then switch to dark.  Do the contrary otherwise."
 ;; Projectile
 (use-package projectile
   :after (helm)
+  :commands (projectile-mode)
   :bind-keymap
   ("C-c p" . projectile-command-map)
   ("s-p" . projectile-command-map)
@@ -183,6 +187,7 @@ If the current mode is light then switch to dark.  Do the contrary otherwise."
 
 ;; Magit
 (use-package magit
+  :commands (global-magit-file-mode)
   ;; Magit enables auto-revert-mode for git tracked files
   :diminish auto-revert-mode
   :bind ("C-x g" . magit-status)
