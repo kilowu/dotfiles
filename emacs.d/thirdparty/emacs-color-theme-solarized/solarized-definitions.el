@@ -764,6 +764,8 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 ;; magit
                 (magit-log-sha1 (,@fg-red))
                 (magit-branch (,@fg-yellow))
+                (magit-blame-hash (,@fg-base1 ,@bg-base02))
+                (magit-blame-highlight (,@fg-base1 ,@bg-base02))
                 (magit-diff-context (:inherit default))
                 (magit-diff-context-highlight (,@fg-base1 ,@bg-base02))
                 (magit-diff-file-heading-highlight (,@fg-base1 ,@bg-base02))
