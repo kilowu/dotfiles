@@ -224,12 +224,16 @@ If the current mode is light then switch to dark.  Do the contrary otherwise."
 ;; markdown-mode
 ;;  doc: https://jblevins.org/projects/markdown-mode/
 (use-package markdown-mode
-  :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-    :init (setq markdown-command "multimarkdown"))
+  :init (setq markdown-command "multimarkdown"))
+
+
+;; protobuf-mode
+(use-package protobuf-mode
+  :mode (("\\.proto\\'" . protobuf-mode)))
 
 
 ;;; Other customization stuff not managed by use-package
