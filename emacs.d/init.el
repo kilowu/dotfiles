@@ -195,19 +195,24 @@ If the current mode is light then switch to dark.  Do the contrary otherwise."
   ;; "C-c M-g" to magit-file-popup when in normal file buffer
   (global-magit-file-mode))
 
+(defcustom my-emacs-enable-irony t
+  "Whether enables irony mode."
+  :type 'boolean
+  :group 'my-emacs)
 
-;; Irony
-(use-package irony
-  :diminish irony-mode
-  :hook
-  (c++-mode . irony-mode)
-  (c-mode . irony-mode)
-  (irony-mode . irony-cdb-autosetup-compile-options))
+(when my-emacs-enable-irony
+  ;; Irony
+  (use-package irony
+    :diminish irony-mode
+    :hook
+    (c++-mode . irony-mode)
+    (c-mode . irony-mode)
+    (irony-mode . irony-cdb-autosetup-compile-options))
 
-;; company-irony: the irony back-end of company
-(use-package company-irony
-  :after (irony company)
-  :config (add-to-list 'company-backends 'company-irony))
+  ;; company-irony: the irony back-end of company
+  (use-package company-irony
+    :after (irony company)
+    :config (add-to-list 'company-backends 'company-irony)))
 
 
 ;; Brute-forced jump-to-definition tool. Just ag/git-grep/grep the code by pattern.
