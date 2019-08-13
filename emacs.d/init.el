@@ -70,10 +70,9 @@
 
       ;; macOS things
       (if (eq system-type 'darwin)
-          ;; Set font (especially for size), because the default font size is too
-          ;; small on macOS.
-          (set-face-attribute 'default nil :font
-                              "-outline-Monaco-normal-normal-normal-mono-14-*-*-*-c-*-iso8859-1" )
+          ;; Consolas is my new favorite
+          (set-face-attribute 'default nil
+                              :family "Consolas" :height 145 :weight 'normal)
         ;; Turn off menu bar if the system is not macOS. Menu bar only looks good at
         ;; GUI mode of macOS, which resides at the top of desktop.
         (menu-bar-mode 0))
